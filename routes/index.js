@@ -4,13 +4,13 @@ var quizController = require('../controllers/quiz_controller');
 
 // Pagina de entrada (home page)
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Proyecto Quiz' });
+	res.render('index', { title: 'Quiz', errors: []});
 });
 
-/* GET home page. */
+/* GET credit page. */
 router.get('/credit', function(req, res) {
-  res.render('credit');
-});
+	res.render('credit', { title: 'credit', errors: []});
+}); 
 
 
 // Autoload de comandos con :quizId
