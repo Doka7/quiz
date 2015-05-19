@@ -20,7 +20,8 @@
     "ejs": "~0.8.5",
     "express-partials": "~0.3.0",
     "method-override": "~2.3.3",
-    "pg": "~4.3.0"
+    "pg": "~4.3.0",
+    "express-session": "~1.11.2"
   },
   "devDependecies": {
     "sqlite3": "~2.2.7"
