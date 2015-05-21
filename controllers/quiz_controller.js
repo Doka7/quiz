@@ -50,6 +50,20 @@ exports.new = function(req, res) {
 	res.render('quizes/new', {quiz: quiz, errors: []});
 };
 
+//GET /quizes/statistics
+//exports.statistics = function(req, res) {
+//	var numero_preguntas = models.Quiz.count();
+//	res.render('quizes/statistics', {num_preg: numero_preguntas, errors: []});
+//}
+exports.statistics = function(req,res){
+models.Comment.findAll().then(function(comment){
+models.Quiz.findAll().then(function(quizes){
+res.render('quizes/statistics',{quiz: req.quiz, quizes: quizes, comment: comment, errors: []});
+})
+}).catch(function(error) { next(error)});
+};
+
+
 // POST /quizes/create
 exports.create = function(req, res) {
 	var quiz = models.Quiz.build( req.body.quiz );
