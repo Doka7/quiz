@@ -76,16 +76,23 @@ exports.statistics = function(req,res){
 // POST /quizes/create
 exports.create = function(req, res) {
 	req.body.quiz.UserId = req.session.user.id;
+<<<<<<< HEAD
 	if(req.files.image){
 		req.body.quiz.image = req.files.image.name;
 	}
+=======
+>>>>>>> d3189d4c2d04f24afd1760c064773d0eb9a790fe
 	var quiz = models.Quiz.build( req.body.quiz );
 	quiz.validate().then(function(err){
 		if (err) {
 			res.render('quizes/new', {quiz: quiz, errors: err.errors});
 		} else {
 			quiz // save: guarda en DB campos pregunta y respuesta de quiz
+<<<<<<< HEAD
 			.save({fields: ["pregunta", "respuesta", "UserId", "image"]})
+=======
+			.save({fields: ["pregunta", "respuesta", "UserId"]})
+>>>>>>> d3189d4c2d04f24afd1760c064773d0eb9a790fe
 			.then( function(){ res.redirect('/quizes')})
 		} // res.redirect: Redirección HTTP a lista de preguntas
 	}).catch(function(error){next(error)});
