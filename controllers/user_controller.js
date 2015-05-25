@@ -27,7 +27,6 @@ exports.load = function(req, res, next, userId) {
 	}).catch(function(error){next(error)});
 };
 
-
 // Comprueba si el usuario esta registrado en users
 // Si autenticación falla o hay errores se ejecuta callback(error).
 exports.autenticar = function(login, password, callback) {
@@ -98,4 +97,3 @@ exports.destroy = function(req, res) {
 		res.redirect('/');
 	}).catch(function(error){next(error)});
 };
-}; 
