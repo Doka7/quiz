@@ -1,5 +1,4 @@
 var models = require('../models/models.js');
-<<<<<<< HEAD
 
 // MW que permite acciones solamente si el usuario objeto corresponde con el usuario logeado o si es cuenta admin
 exports.ownershipRequired = function(req, res, next){
@@ -27,8 +26,7 @@ exports.load = function(req, res, next, userId) {
 		} else{next(new Error('No existe userId=' + userId))}
 	}).catch(function(error){next(error)});
 };
-=======
->>>>>>> d3189d4c2d04f24afd1760c064773d0eb9a790fe
+
 
 // Comprueba si el usuario esta registrado en users
 // Si autenticación falla o hay errores se ejecuta callback(error).
@@ -45,7 +43,6 @@ exports.autenticar = function(login, password, callback) {
 			else { callback(new Error('Password erróneo.')); }
 		} else { callback(new Error('No existe user=' + login))}
 	}).catch(function(error){callback(error)});
-<<<<<<< HEAD
 }; 
 // GET /user/:id/edit
 exports.edit = function(req, res) {
@@ -101,6 +98,4 @@ exports.destroy = function(req, res) {
 		res.redirect('/');
 	}).catch(function(error){next(error)});
 };
-=======
 }; 
->>>>>>> d3189d4c2d04f24afd1760c064773d0eb9a790fe
