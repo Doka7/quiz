@@ -7,31 +7,33 @@
 
 	<body>
 
-	<% var conComentarios = 0; %>
-	<% var j; for (j=0; j < comment.length; j++) { %>
-		<% var i; for (i=0; i < quizes.length; i++) { %>
-			<% if(comment[j].QuizId == i){ %>
-				<% ++conComentarios; %>
+		<% var conComentarios = 0; %>
+		<% var comentarios=0; %>
+		<% var preguntas=quizes.length; %>
+
+		<%for (i=0; i<comment.length; i++){ %>
+			<%if(comment[i].publicado){ %>
+				<% comentarios++; %>
 			<% } %>
 		<% } %>
-	<% } %>
+
+		<% var media = comentarios/preguntas; %>
+		
+		<% var j; for (j=0; j < comment.length; j++) { %>
+			<% var i; for (i=0; i < quizes.length; i++) { %>
+				<% if(comment[j].QuizId == i+1){ %>
+					<% ++conComentarios; %>
+				<% } %>
+			<% } %>
+		<% } %>
 		<h2>Estadísticas del Quiz:</h2><br>
 		<ul>
-			<li>Número de preguntas: 
-				<p><%=quizes.length%></p>
-			</li>
-			<li>Número de comentarios totales: 
-			<p><%=comment.length%></p>
-			</li>
-			<li>Número medio de comentarios por pregunta: 			
-				<p id="media"></p>
-			</li>
-			<li>Número de preguntas sin comentarios: <p><%=quizes.length-conComentarios%></p></li>
-			<li>Número de preguntas con comentarios: <p><%=conComentarios%></p></li>
+			<li>Número de preguntas: <%=preguntas%></li>
+			<li>Número de comentarios totales: <%=comentarios%></li>
+			<li>Número medio de comentarios por pregunta: <%=media%></li>
+			<li>Número de preguntas sin comentarios: <%=preguntas-conComentarios%></li>
+			<li>Número de preguntas con comentarios: <%=conComentarios%></li>
 		</ul>
+
 	</body>
-	<script type="text/javascript">
-		var media = <%=comment.length%>/<%=quizes.length%>;
-		document.getElementById("media").innerHTML = media;	
-	</script>
 </html>

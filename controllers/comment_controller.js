@@ -60,7 +60,7 @@ exports.create = function(req, res) {
 	if (err) {
 		res.render('comments/new.ejs', {comment: comment, errors: err.errors});
 	} else {
-		comment .save().then( function(){ res.redirect('/quizes/'+req.params.quizId)}) // save: guarda en DB campo texto de comment
+		comment.save().then( function(){ res.redirect('/quizes/'+req.params.quizId)}) // save: guarda en DB campo texto de comment
 	} // res.redirect: Redirección HTTP a lista de preguntas
 }).catch(function(error){next(error)});
 };
@@ -68,13 +68,10 @@ exports.create = function(req, res) {
 
 //Autoload :id de comentarios
 exports.load = function(req, res, next, commentId){
-models.Comment.find({ where: {id: Number(commentId)}
-})
-.then(
-function(comment){
-if(comment) {
-req.comment = comment;
-next();
-} else { next(new Error('No existe commentId=' + commentId))}
-}).catch(function(error) {next(error)});
+	models.Comment.find({ where: {id: Number(commentId)}}).then(function(comment){
+		if(comment) {
+			req.comment = comment;
+			next();
+		} else { next(new Error('No existe commentId=' + commentId))}
+	}).catch(function(error) {next(error)});
 };

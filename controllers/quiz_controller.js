@@ -67,15 +67,6 @@ exports.new = function(req, res) {
 	res.render('quizes/new', {quiz: quiz, errors: []});
 };
 
-//GET /quizes/statistics
-exports.statistics = function(req,res){
-	models.Comment.findAll().then(function(comment){
-		models.Quiz.findAll().then(function(quizes){
-			res.render('quizes/statistics',{quiz: req.quiz, quizes: quizes, comment: comment, errors: []});
-		})
-	}).catch(function(error) { next(error)});
-};
-
 // POST /quizes/create
 exports.create = function(req, res) {
 	req.body.quiz.UserId = req.session.user.id;
@@ -123,6 +114,15 @@ exports.destroy = function(req, res) {
 	req.quiz.destroy().then( function() {
 		res.redirect('/quizes');
 	}).catch(function(error){next(error)});
+};
+
+//GET /quizes/statistics
+exports.statistics = function(req,res){
+	models.Comment.findAll().then(function(comment){
+		models.Quiz.findAll().then(function(quizes){
+			res.render('quizes/statistics',{quizes: quizes, comment: comment, errors: []});
+		})
+	}).catch(function(error) { next(error)});
 };
 
 // console.log("req.quiz.id: " + req.quiz.id);

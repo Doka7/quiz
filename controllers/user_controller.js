@@ -45,15 +45,15 @@ exports.autenticar = function(login, password, callback) {
 }; 
 // GET /user/:id/edit
 exports.edit = function(req, res) {
-res.render('user/edit', { user: req.user, errors: []});
+	res.render('user/edit', { user: req.user, errors: []});
 }; // req.user: instancia de user cargada con autoload
 
 // GET /user
 exports.new = function(req, res) {
-var user = models.User.build( // crea objeto user
-{username: "", password: ""}
-);
-res.render('user/new', {user: user, errors: []});
+	var user = models.User.build( // crea objeto user
+	{username: "", password: ""}
+	);
+	res.render('user/new', {user: user, errors: []});
 };
 
 // POST /user
@@ -81,7 +81,7 @@ exports.update = function(req, res, next) {
 		if (err) {
 			res.render('user/' + req.user.id, {user: req.user, errors: err.errors});
 		} else {
-			req.user // save: guarda campo username y password en DB
+			req.user.save({fields: ["username", "password"]}) // save: guarda campo username y password en DB
 			.then(function(){ 
 				res.redirect('/');
 			});

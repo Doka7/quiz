@@ -13,6 +13,18 @@
 					</form>
 				</td>
 			<%}%>
+			<td>
+				<form method="post" action="/user/<%=session.user.id %>/favourites/<%= quizes[i].id %>?_method=put">
+					<button type="submit">
+						Añadir fav
+					</button>
+				</form>
+				<form method="post" action="/user/<%=session.user.id %>/favourites/<%= quizes[i].id %>?_method=delete">
+					<button type="submit">
+						Quitar fav
+					</button>
+				</form>
+			</td>
 		<%}%>
 	</tr>
 	<% } %>

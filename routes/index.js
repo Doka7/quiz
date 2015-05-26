@@ -5,6 +5,7 @@ var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
 var userController = require('../controllers/user_controller');
+var favouritesController = require('../controllers/favourites_controller');
 
 // Pagina de entrada (home page)
 router.get('/', function(req, res) {
@@ -17,10 +18,12 @@ router.get('/credit', function(req, res) {
 }); 
 
 router.get('/statistics', quizController.statistics);
+
 // Autoload de comandos con ids
 router.param('quizId', quizController.load); // autoload :quizId
 router.param('commentId', commentController.load); // autoload :commentId
 router.param('userId', userController.load); // autoload :userId
+
 // Definición de rutas de sesion
 router.get('/login', sessionController.new); // formulario login
 router.post('/login', sessionController.create); // crear sesión
@@ -50,5 +53,11 @@ router.delete('/quizes/:quizId(\\d+)',sessionController.loginRequired, quizContr
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.ownershipRequired, commentController.publish);
+
+
+//Definición de rutas de favoritos
+router.get('/user/:userId(\\d+)/favourites', sessionController.loginRequired, favouritesController.list);
+router.put('/user/:userId(\\d+)/favourites/:quizId(\\d+)', sessionController.loginRequired, favouritesController.like);
+router.delete('/user/:userId(\\d+)/favourites/:quizId(\\d+)', sessionController.loginRequired, favouritesController.delete);
 
 module.exports = router;
