@@ -77,16 +77,16 @@ exports.create = function(req, res) {
 exports.update = function(req, res, next) {
 	req.user.username = req.body.user.username;
 	req.user.password = req.body.user.password;
-
 	req.user.validate().then(function(err){
 		if (err) {
 			res.render('user/' + req.user.id, {user: req.user, errors: err.errors});
 		} else {
 			req.user // save: guarda campo username y password en DB
-			.then( function(){ res.redirect('/');});
+			.then(function(){ 
+				res.redirect('/');
+			});
 		} // Redirección HTTP a /
-	}
-	).catch(function(error){next(error)});
+	}).catch(function(error){next(error)});
 };
 
 // DELETE /user/:id

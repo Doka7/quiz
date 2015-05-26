@@ -25,6 +25,9 @@
 			<span><a href="/quizes">Preguntas</a></span>
 			<span><a href="/statistics">Estadisticas</a></span>
 			<span><a href="/credit">Créditos</a></span>
+			<%if(session.user){%>
+				<span><a href="/user/<%=session.user.id%>/quizes">Mis Preguntas</a></span>
+			<%}%>
 		</nav>
 
 		<section class="main" id="s1">

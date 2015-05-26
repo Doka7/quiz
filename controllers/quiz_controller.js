@@ -32,12 +32,16 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes/question
 exports.index = function(req, res) {
+	var options = {};
+	if(req.user){
+		options.where = {UserId: req.user.id}
+	}
 	if (req.query.search) {
 		models.Quiz.findAll({where: ["pregunta like ?", '%' + req.query.search + '%']}).then(
  		function(quizes) {res.render('quizes/index.ejs', { quizes: quizes, errors: []});}).catch(function(error) { next(error)});
 	}
 	else{
-		models.Quiz.findAll().then(
+		models.Quiz.findAll(options).then(
  		function(quizes) {res.render('quizes/index.ejs', { quizes: quizes, errors: []});}).catch(function(error) { next(error)});
 	}
 };
@@ -92,17 +96,17 @@ exports.create = function(req, res) {
 
 // GET /quizes/:id/edit
 exports.edit = function(req, res) {
- var quiz = req.quiz; // req.quiz: autoload de instancia de quiz
- res.render('quizes/edit', {quiz: quiz, errors: []});
+	var quiz = req.quiz; // req.quiz: autoload de instancia de quiz
+	res.render('quizes/edit', {quiz: quiz, errors: []});
 };
 
 // PUT /quizes/:id
 exports.update = function(req, res) {
+	req.quiz.pregunta = req.body.quiz.pregunta;
+	req.quiz.respuesta = req.body.quiz.respuesta;
 	if(req.files.image){
 		req.quiz.image = req.files.image.name;
 	}
-	req.quiz.pregunta = req.body.quiz.pregunta;
-	req.quiz.respuesta = req.body.quiz.respuesta;
 	req.quiz.validate().then(function(err){
 		if (err) {
 			res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
