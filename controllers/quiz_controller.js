@@ -95,6 +95,7 @@ exports.edit = function(req, res) {
 exports.update = function(req, res) {
 	req.quiz.pregunta = req.body.quiz.pregunta;
 	req.quiz.respuesta = req.body.quiz.respuesta;
+	req.quiz.categoria = req.body.quiz.categoria;
 	if(req.files.image){
 		req.quiz.image = req.files.image.name;
 	}
