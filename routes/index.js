@@ -56,8 +56,8 @@ router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionCon
 
 
 //Definición de rutas de favoritos
-router.get('/user/:userId(\\d+)/favourites', sessionController.loginRequired, favouritesController.list);
-router.put('/user/:userId(\\d+)/favourites/:quizId(\\d+)', sessionController.loginRequired, favouritesController.like);
+router.get('/user/:userId(\\d+)/favourites', sessionController.loginRequired, favouritesController.index);
+router.put('/user/:userId(\\d+)/favourites/:quizId(\\d+)', sessionController.loginRequired, favouritesController.fav);
 router.delete('/user/:userId(\\d+)/favourites/:quizId(\\d+)', sessionController.loginRequired, favouritesController.delete);
 
 module.exports = router;
