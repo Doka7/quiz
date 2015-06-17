@@ -3,7 +3,7 @@
 <%}%>
 <form method="get" action="/quizes/<%= quiz.id %>/answer">
 	<%= quiz.pregunta %> <p>
-	<%= quiz.categoria %> <p>
+	Categoria: <%= quiz.categoria %> <p>
 
 	<input type="text" name="respuesta" placeholder="Responda aquí"/>
 	<input type="submit" value="Enviar">
