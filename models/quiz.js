@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
 			},
 			image: {
 				type: DataTypes.STRING
+			},
+			categoria: {
+				type: DataTypes.STRING,
+				validate: { notEmpty: {msg: "-> Falta Categoria"}}
 			}
 		}
 	);

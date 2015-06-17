@@ -1,8 +1,20 @@
 <label for="preg" class="rem">Pregunta:</label>
 <input type="text" id="preg" name="quiz[pregunta]" placeholder="<%= quiz.pregunta %>"/> <p>
+
 <label for="resp" class="rem">Respuesta:</label>
 <input type="text" id="resp" name="quiz[respuesta]" placeholder="<%= quiz.respuesta %>"/> <p>
+
+<label for="categoria" class="rem">Categoria:</label>
+ <select name="tema">
+  <option value="otro" selected>Otro</option>
+  <option value="humanidades">Humanidades</option>
+  <option value="ocio">Ocio</option>
+  <option value="ciencia">Ciencia</option>
+  <option value="tecnologia">Tecnología</option>
+</select>
+
 <label for="image" class="rem">Imagen:</label>
 <input type="file" accept="image/*" id="image" name="image"/><p>
+
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar">
